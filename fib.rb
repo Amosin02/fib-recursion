@@ -1,21 +1,26 @@
 def fibs(n)
-    array = []
-    0.upto(n) do |i|
-        if i == 0
-            array << 0
-        elsif i == 1
-            array << 1
-        else
-            fib = array[i-1] + array[i-2]
-            array << fib
-        end
+  array = []
+  0.upto(n) do |i|
+    if i == 0
+      array << 0
+    elsif i == 1
+      array << 1
+    else 
+      fib = array[i - 1] + array[i - 2]
+      array << fib
     end
-    array[0..-2]
+  end
+  array
 end
 
 p fibs(8)
 
 def fibs_rec(n)
-    arr = []
-    return 
+  return [0] if n == 0
+  return [0, 1] if n == 1
+
+  array = fibs_rec(n - 1)
+  array << array[n - 1] + array[n - 2]
 end
+
+p fibs_rec(8)
