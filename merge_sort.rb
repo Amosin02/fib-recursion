@@ -1,12 +1,31 @@
-def mergeSort(arr)
-    return arr if arr.length < 2
-    left = arr[0..((arr.length/2)-1)]
-    right = arr[(arr.length/2)..-1]
-
-    # have managed to cut the array in half. we now need to sort each halves
-    # find a way to sort without using #sort
-    left.each do |i|
-    puts "#{left} #{right}"
+def merge_sort(array)
+  if array.size < 2
+    array
+  else
+    left = merge_sort(array[0...array.size / 2])
+    right = merge_sort(array[array.size / 2...array.size])
+    merge(left, right)
+  end
 end
 
-p mergeSort([1, 2, 3, 4, 5, 6])
+def merge(left, right, array = [])
+  (left.size + right.size).times do
+    if left.empty?
+      array << right.shift
+    elsif right.empty?
+      array << left.shift
+    else
+      comparison = left <=> right
+      if comparison == -1
+        array << left.shift
+      elsif comparison == 1
+        array << right.shift
+      else
+        array << left.shift
+      end
+    end
+  end
+  array
+end
+
+p merge_sort([6, 3, 2, 5, 1])
